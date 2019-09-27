@@ -229,7 +229,14 @@ elseif(SYSTEM_LINUX)
 endif()
 
 # Install
-include(RobomongoInstall)
+# include(RobomongoInstall)     # wtf3
+
+install(TARGETS robomongo
+  EXPORT RobomongoConfig
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 #
 # Tests targets (code below should be moved to separate file)

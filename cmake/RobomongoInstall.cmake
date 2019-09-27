@@ -70,13 +70,7 @@ elseif(SYSTEM_MACOSX)
         "${OpenSSL_DIR}/libcrypto.1.0.0.dylib"
         DESTINATION ${lib_dir}/lib)
 elseif(SYSTEM_LINUX)
-    install(
-        FILES 
-        "${OpenSSL_DIR}/libssl.so"
-        "${OpenSSL_DIR}/libssl.so.1.0.0"        
-        "${OpenSSL_DIR}/libcrypto.so"        
-        "${OpenSSL_DIR}/libcrypto.so.1.0.0"
-        DESTINATION ${lib_dir})         
+    # no thanks
 endif()
 
 # Install binary
@@ -104,12 +98,7 @@ if(SYSTEM_LINUX)
     install_qt_plugins(
         QXcbIntegrationPlugin)
         
-    # Install newer versions of libstdc++ to support C++11
-    install(
-        FILES
-            "/usr/lib/x86_64-linux-gnu/libstdc++.so.6"
-            "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22"
-        DESTINATION ${lib_dir})
+    # no thanks again.. whats you problem guys?!?
 elseif(SYSTEM_MACOSX)
     install_qt_lib(MacExtras DBus)
     install_qt_plugins(

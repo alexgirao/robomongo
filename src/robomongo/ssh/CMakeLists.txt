@@ -1,5 +1,7 @@
 include(CheckIncludeFiles)
 include(CheckSymbolExists)
+include(CMakePushCheckState)
+include(CheckIncludeFile)
 
 ## Platform checks
 check_include_files(inttypes.h HAVE_INTTYPES_H)
@@ -19,6 +21,10 @@ check_symbol_exists(_snprintf stdio.h HAVE__SNPRINTF)
 check_symbol_exists(__func__ "" HAVE___FUNC__)
 check_symbol_exists(__FUNCTION__ "" HAVE___FUNCTION__)
 
+find_path(LIBSSH2_INCLUDE_DIR NAMES "libssh2.h")
+find_library(CRYPTO_LIBRARY NAMES crypto)
+find_library(SSL_LIBRARY NAMES ssl)
+
 configure_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/libssh2_config.h.in
     ${CMAKE_CURRENT_BINARY_DIR}/libssh2_config.h)
@@ -28,12 +34,16 @@ add_library(ssh ssh.c log.c array.c)
 
 target_link_libraries(ssh
     PUBLIC
-        libssh2)
+        ssh2)
 
 target_include_directories(ssh
     PUBLIC
         ${CMAKE_BINARY_DIR}/src
         ${CMAKE_SOURCE_DIR}/src)
+
+target_include_directories(ssh PUBLIC ${LIBSSH2_INCLUDE_DIR})
+target_link_libraries(ssh PUBLIC ${CRYPTO_LIBRARY})
+target_link_libraries(ssh PUBLIC ${SSL_LIBRARY})
 
 # Server
 add_executable(server server.c)

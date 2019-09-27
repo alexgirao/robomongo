@@ -22,8 +22,9 @@ include(RobomongoDefaults)
 include(RobomongoCommon)
 include(RobomongoTrashSymbols)
 include(RobomongoTargetArch)
-include(RobomongoInstallQt)
-include(RobomongoPackage)
+
+# include(RobomongoInstallQt)   # wtf1
+# include(RobomongoPackage)     # wtf2
 
 # Search for dependencies
 find_package(Threading REQUIRED)    # Wrapper arround CMake "Threads" module
@@ -46,7 +47,7 @@ set(GOOGLE_TEST_VERSION 1.8.1)
 set(GOOGLE_TEST_DIR src/third-party/googletest-${GOOGLE_TEST_VERSION})
 
 # Projects
-add_subdirectory(src/third-party/libssh2)
+#add_subdirectory(src/third-party/libssh2)
 add_subdirectory(src/robomongo/ssh)
 add_subdirectory(src/third-party/qjson)
 add_subdirectory(src/third-party/qscintilla)
